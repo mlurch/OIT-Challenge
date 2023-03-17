@@ -11,24 +11,23 @@ int RomanNum::toDecimal(string& input) {
         } 
 
         auto itr = romMap.find(input.at(i));
-        if (i == (input.size() - 1)) {
-            total += itr->second;
+        if (i == (input.size() - 1)) { 
+            total += itr->second; //RULE 1
         }
         else if (!isRomNum(input.at(i + 1))) {
             return -1;
         }
         else {
             auto itr2 = romMap.find(input.at(i + 1));
-            if (itr->second < itr2->second) {
-                if (itr2->second > ((itr->second * 10) + 1)) {
+            if ((itr->second < itr2->second)) { 
+                if (itr2->second > ((itr->second * 10) + 1)) { //RULE 4
                     return -1;
                 }
-                total += (itr2->second - itr->second);
-                i++;
+                total += (itr2->second - itr->second); //RULE 2
+                i++; //RULE 3
             }
-            
-            else {
-                total += itr->second;
+            else { 
+                total += itr->second; //RULE 1
             } 
         }        
     }
