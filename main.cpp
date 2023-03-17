@@ -11,16 +11,21 @@ int main() {
     RomanNum rn;
     while (!end) {
         cout << "Please enter the number of which you would like to do. Enter -1 to exit." << endl;
-        cout << "\t1: Roman Numerals to Decimal" << endl;
-        cout << "\t2: Decimal to Roman Numerals" << endl;
+        cout << "\t1: Roman Numeral to Decimal" << endl;
+        cout << "\t2: Decimal to Roman Numeral" << endl;
         //cout << "\t3: Read in file" << endl; //will add this functionality if there is time
 
         cin >> userInt;
-        if (userInt == 1) {
+        if (userInt == 1) { //FIXME: loop on one mode to allow for ease of multiple inputs
             cout << "Enter the roman numeral you would like to convert: ";
             cin >> userStr;
             int out = rn.toDecimal(userStr);
-            cout << "\n" << userStr << " is " << out << "\n" << endl;
+            if (out == -1) {
+                cout << "Not a valid roman numeral!" << endl;
+            }
+            else {
+                cout << "\n" << userStr << " is " << out << "\n" << endl;
+            }            
         } 
         else if (userInt == 2) {
             cout << "Enter the decimal you would like to convert: ";
@@ -36,7 +41,7 @@ int main() {
             end = true;
         }
         else {
-            cout << "Invalid input." << endl;
+            cout << "Invalid input.\n" << endl;
             loopCount++;
             if (loopCount == 3) { //to deal with user inputs that would cause inf loop i.e. string/char
                 end = true;
