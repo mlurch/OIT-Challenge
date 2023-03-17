@@ -1,12 +1,11 @@
 #include <cctype>
 #include "RomanNum.h"
 
-RomanNum::RomanNum() { }
 int RomanNum::toDecimal(string& input) {
     int total = 0;
     for (unsigned int i = 0; i < input.size(); i++) {
         input = makeUpper(input); //to allow for upper and lowercase inputs
-        if (!isRomNum(input.at(i))) { //checks if character is a valid roman numeral
+        if (!isRomNumKey(input.at(i))) { //checks if character is a valid roman numeral
             return -1;
         } 
 
@@ -14,7 +13,7 @@ int RomanNum::toDecimal(string& input) {
         if (i == (input.size() - 1)) { 
             total += itr->second; //RULE 1
         }
-        else if (!isRomNum(input.at(i + 1))) {
+        else if (!isRomNumKey(input.at(i + 1))) {
             return -1;
         }
         else {
@@ -34,13 +33,45 @@ int RomanNum::toDecimal(string& input) {
     return total;
 }
 string RomanNum::toRom(int input) {
-    return "nice";
+    string answer;
+    if (input <= 0) {
+        return "invalid";
+    }
+    char key = isRomNumValue(input);
+    if (key != 'P') {
+        answer += key;
+    }
+    else {
+        int intMod = determineMod(input);
+        if (input % intMod == 4 || input % intMod == 9) {
+            answer += 'M'; //FIXME
+        }
+    }
+    return answer;
 }
-bool RomanNum::isRomNum(char toCheck) const {
+bool RomanNum::isRomNumKey(char toCheck) const {
     if(romMap.find(toCheck) != romMap.end()) {
         return true;
     }
     return false;
+}
+char RomanNum::isRomNumValue(int toCheck) const {
+    for (auto kv : romMap) {
+        if (kv.second == toCheck) {
+            return kv.first;
+        }
+    }
+    return 'P';
+}
+int RomanNum::determineMod(int toMod) { //returns the number you need to get the value of the greatest place number using modulo
+    int numZeros = to_string(toMod).size() - 2;
+    string strMod = "1";
+    for (int i = 0; i < numZeros; i++) {
+        strMod += "0";
+    }
+    
+    int intMod = stoi(strMod);
+    return intMod;
 }
 string RomanNum::makeUpper(string& toChange) {
     for (unsigned int i = 0; i < toChange.size(); i++) {

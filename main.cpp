@@ -33,7 +33,12 @@ int main() {
             cout << "Enter the decimal you would like to convert: ";
             cin >> userInt;
             string out = rn.toRom(userInt);
-            cout << "\n" << userInt << " is " << out << "\n" << endl;
+            if (out == "invalid") {
+                cout << "Invalid input, cannot convert!" << endl;
+            }
+            else {
+                cout << "\n" << userInt << " is " << out << "\n" << endl;
+            }
         }
         /* else if (userInt == 3) {
             cout << "Enter the name of the file you would like to parse: ";

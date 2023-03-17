@@ -16,9 +16,10 @@ private:
         {'M',1000}
     };
 public:
-    RomanNum();
     int toDecimal(string& input);
     string toRom(int input);
-    bool isRomNum(char toCheck) const;
+    bool isRomNumKey(char toCheck) const;
+    char isRomNumValue(int toCheck) const;
+    int determineMod(int toMod);
     string makeUpper(string& toChange);
 };
