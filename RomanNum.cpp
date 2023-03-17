@@ -20,14 +20,13 @@ int RomanNum::toDecimal(string& input) {
         else {
             auto itr2 = romMap.find(input.at(i + 1));
             if (itr->second < itr2->second) {
+                if (itr2->second > ((itr->second * 10) + 1)) {
+                    return -1;
+                }
                 total += (itr2->second - itr->second);
                 i++;
             }
-            else if (itr->second % 10 == 0) {
-                if (itr2->second > ((itr->second / 10) - 1)) {
-                    return -1;
-                }
-            }
+            
             else {
                 total += itr->second;
             } 

@@ -7,13 +7,15 @@ int main() {
     bool end = false;
     int loopCount = 0;
 
-    cout << "Welcome!" << endl;
+    cout << "Welcome!\n" << endl;
     RomanNum rn;
     while (!end) {
-        cout << "Please enter the number of which you would like to do. Enter -1 to exit." << endl;
-        cout << "\t1: Roman Numeral to Decimal" << endl;
-        cout << "\t2: Decimal to Roman Numeral" << endl;
+        cout << " 1: Roman Numeral to Decimal" << endl;
+        cout << " 2: Decimal to Roman Numeral" << endl;
         //cout << "\t3: Read in file" << endl; //will add this functionality if there is time
+        cout << "-1: Exit\n" << endl;
+        cout << "Please enter your choice numerically: ";
+
 
         cin >> userInt;
         if (userInt == 1) { //FIXME: loop on one mode to allow for ease of multiple inputs
@@ -43,7 +45,7 @@ int main() {
         else {
             cout << "Invalid input.\n" << endl;
             loopCount++;
-            if (loopCount == 3) { //to deal with user inputs that would cause inf loop i.e. string/char
+            if (loopCount == 2) { //to deal with user inputs that would cause inf loop i.e. string/char
                 end = true;
                 cout << "Terminating program due to bad input." << endl;
             }
